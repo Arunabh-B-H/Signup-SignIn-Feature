@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VishwaExpo | Explore the World</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <header class="navbar">
+    <div class="logo">Vishwa<span>Expo</span></div>
+
+    <div class="menu-toggle" id="mobile-menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+
+    <nav class="nav-links">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#destinations">Destinations</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="SignIn.html" class="logout-link" style="color: #ff4d4d;">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="hero-content">
+        <h1>Adventure Awaits You</h1>
+        <p>Discover hidden gems and create unforgettable memories with our curated travel experiences.</p>
+        <a href="#destinations" class="cta-btn">Start Exploring</a>
+      </div>
+    </section>
+
+    <section id="features" class="features">
+      <h2 class="section-title">Why Choose Us</h2>
+      <div class="features-container">
+        <div class="feature-card">
+          <div class="icon">🌍</div>
+          <h3>Global Reach</h3>
+          <p>Access over 500+ destinations across 7 continents.</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon">🛡️</div>
+          <h3>Safe Travel</h3>
+          <p>Your safety is our priority with 24/7 localized support.</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon">💰</div>
+          <h3>Best Prices</h3>
+          <p>Premium experiences at prices that fit your budget.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="destinations" class="destinations">
+      <h2 class="section-title">Popular Destinations</h2>
+      <div class="destinations-grid">
+        <article class="dest-card">
+          <img src="images/img1.jpeg" alt="Beautiful Bali">
+          <div class="dest-info">
+            <h3>Bali, Indonesia</h3>
+            <p>Tropical paradise with lush jungles and pristine beaches.</p>
+          </div>
+        </article>
+        <article class="dest-card">
+          <img src="images/img2.jpeg" alt="Santorini Sunset">
+          <div class="dest-info">
+            <h3>Santorini, Greece</h3>
+            <p>Iconic white buildings overlooking the deep blue Aegean Sea.</p>
+          </div>
+        </article>
+        <article class="dest-card">
+          <img src="images/img3.jpeg" alt="Tokyo Night Life">
+          <div class="dest-info">
+            <h3>Tokyo, Japan</h3>
+            <p>A vibrant blend of futuristic tech and ancient traditions.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <h2 class="section-title">Get In Touch</h2>
+      <form id="contact-form" class="contact-form">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required placeholder="Your Name">
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required placeholder="Your Email">
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required placeholder="Your Message"></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 VishwaExpo Travel Agency. All rights reserved.</p>
+  </footer>
+  <div id="success-modal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-icon">✅</div>
+      <h3>Success!</h3>
+      <p>Message sent successfully. We will reach out soon!</p>
+      <button id="close-modal-btn">Close</button>
+    </div>
+  </div>
+
+
+  <script>
+    // --- Hamburger Menu Logic ---
+    const menu = document.querySelector('#mobile-menu');
+    const navLinks = document.querySelector('.nav-links');
+
+    menu.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      menu.classList.toggle('is-active');
+    });
+
+    // --- Form Validation & Popup Logic ---
+    const contactForm = document.getElementById('contact-form');
+    const modal = document.getElementById('success-modal');
+    const closeModalBtn = document.getElementById('close-modal-btn');
+    const messageInput = document.getElementById('message');
+
+    contactForm.addEventListener('submit', (e) => {
+      // 1. Prevent the actual page reload
+      e.preventDefault();
+
+      // 2. Custom Validation: Word Count > 10
+      // We trim whitespace and split by spaces to count words
+      const messageText = messageInput.value.trim();
+      const wordCount = messageText.split(/\s+/).length;
+
+      if (wordCount < 5) {
+        alert(`Your message is too short! It is currently ${wordCount} words. Please write at least 5 words.`);
+        return; // Stop the function here
+      }
+
+      // 3. If validation passes, show the popup
+      modal.classList.add('show');
+
+      // 4. Clear the form fields
+      contactForm.reset();
+    });
+
+    // Close Modal when button is clicked
+    closeModalBtn.addEventListener('click', () => {
+      modal.classList.remove('show');
+    });
+
+    // Close Modal when clicking outside the white box
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('show');
+      }
+    });
+  </script>
+</body>
+
+</html>
